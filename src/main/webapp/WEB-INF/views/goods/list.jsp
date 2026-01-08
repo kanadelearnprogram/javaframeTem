@@ -183,6 +183,100 @@
                 <c:if test="${hasNext}">
                     <a href="${contextPath}/goods/list?goodsName=${empty goodsName ? '' : goodsName}&pageNum=${pageNum + 1}&pageSize=${pageSize}" class="btn">下一页</a>
                 </c:if>
+                
+                <!-- 页码按钮 -->
+                <div style="margin: 10px 0;">
+                    <c:choose>
+                        <c:when test="${totalPages <= 10}">
+                            <!-- 总页数小于等于10，显示全部页码按钮 -->
+                            <c:forEach var="i" begin="1" end="${totalPages}">
+                                <c:choose>
+                                    <c:when test="${i == pageNum}">
+                                        <span class="btn" style="background-color: #28a745; cursor: default;">${i}</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${contextPath}/goods/list?goodsName=${empty goodsName ? '' : goodsName}&pageNum=${i}&pageSize=${pageSize}" class="btn">${i}</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- 总页数大于10，显示省略的页码按钮 -->
+                            <c:forEach var="i" begin="1" end="${totalPages < 5 ? totalPages : 5}">
+                                <c:choose>
+                                    <c:when test="${i == pageNum}">
+                                        <span class="btn" style="background-color: #28a745; cursor: default;">${i}</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${contextPath}/goods/list?goodsName=${empty goodsName ? '' : goodsName}&pageNum=${i}&pageSize=${pageSize}" class="btn">${i}</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            
+                            <c:if test="${pageNum > 5}">
+                                <span class="btn" style="cursor: default;">...</span>
+                                <c:forEach var="i" begin="${pageNum - 1}" end="${pageNum + 1}">
+                                    <c:if test="${i > 5 && i < totalPages - 4}">
+                                        <c:choose>
+                                            <c:when test="${i == pageNum}">
+                                                <span class="btn" style="background-color: #28a745; cursor: default;">${i}</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="${contextPath}/goods/list?goodsName=${empty goodsName ? '' : goodsName}&pageNum=${i}&pageSize=${pageSize}" class="btn">${i}</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                            
+                            <c:if test="${totalPages - pageNum > 4}">
+                                <span class="btn" style="cursor: default;">...</span>
+                                <c:forEach var="i" begin="${totalPages - 4}" end="${totalPages}">
+                                    <c:choose>
+                                        <c:when test="${i == pageNum}">
+                                            <span class="btn" style="background-color: #28a745; cursor: default;">${i}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${contextPath}/goods/list?goodsName=${empty goodsName ? '' : goodsName}&pageNum=${i}&pageSize=${pageSize}" class="btn">${i}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                
+                <span style="margin: 0 10px;">
+                    跳转到第<input type="number" id="jumpPageNum" name="jumpPageNum" min="1" max="${totalPages}" value="" size="4">页
+                    <button onclick="jumpToPage()" class="btn">跳转</button>
+                </span>
+                
+                <script>
+                    function jumpToPage() {
+                        var pageNum = document.getElementById('jumpPageNum').value;
+                        var totalPages = ${totalPages};
+                        
+                        if(pageNum === '') {
+                            alert('请输入页码');
+                            return;
+                        }
+                        
+                        if(isNaN(pageNum) || parseInt(pageNum) < 1) {
+                            alert('页码必须是大于等于1的数字');
+                            return;
+                        }
+                        
+                        if(parseInt(pageNum) > totalPages) {
+                            alert('页码不能超过总页数 ' + totalPages);
+                            return;
+                        }
+                        
+                        var goodsName = '${empty goodsName ? "" : goodsName}';
+                        var pageSize = ${pageSize};
+                        
+                        window.location.href = '${contextPath}/goods/list?goodsName=' + encodeURIComponent(goodsName) + '&pageNum=' + parseInt(pageNum) + '&pageSize=' + pageSize;
+                    }
+                </script>
             </c:if>
         </div>
     </div>
