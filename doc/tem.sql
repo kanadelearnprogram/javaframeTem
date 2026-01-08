@@ -20,9 +20,9 @@ CREATE TABLE `goods` (
 
 -- 测试数据（包含日期、图片路径，贴合考点1/6）
 INSERT INTO `goods` (`goods_name`, `price`, `create_time`, `img_path`, `type_id`)
-VALUES ('小米手机', 1999.00, '2025-12-01', '/images/phone.jpg', 1),
-       ('纯棉毛巾', 19.90, '2025-12-02', '/images/towel.jpg', 2),
-       ('面包', 5.90, '2025-12-03', '/images/bread.jpg', 3);
+VALUES ('小米手机', 1999.00, '2025-12-01', 'https://ts1.tc.mm.bing.net/th/id/OIP-C.T8ndKjUcJPEYHBGNCG8S1gHaEo?rs=1&pid=ImgDetMain&o=7&rm=3', 1),
+       ('纯棉毛巾', 19.90, '2025-12-02', 'https://ts1.tc.mm.bing.net/th/id/OIP-C.T8ndKjUcJPEYHBGNCG8S1gHaEo?rs=1&pid=ImgDetMain&o=7&rm=3', 2),
+       ('面包', 5.90, '2025-12-03', 'https://ts1.tc.mm.bing.net/th/id/OIP-C.T8ndKjUcJPEYHBGNCG8S1gHaEo?rs=1&pid=ImgDetMain&o=7&rm=3', 3);
 
 -- 3. 操作日志表（oper_log）—— 日志记录（考点10）
 CREATE TABLE `oper_log` (
