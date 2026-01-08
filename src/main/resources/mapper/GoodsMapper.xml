@@ -26,5 +26,23 @@
             LIMIT #{offset}, #{limit}
         </if>
     </select>
+    
+    <!-- 使用${}进行模糊查询的示例（未启用） -->
+    <select id="selectByLikeNameWithDollar" parameterType="map" resultMap="GoodsResultMap">
+        SELECT g.*, t.type_name
+        FROM goods g
+        LEFT JOIN goods_type t ON g.type_id = t.type_id
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                g.goods_name LIKE CONCAT('%', ${goodsName}, '%')
+            </if>
+        </where>
+        ORDER BY g.create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+    
+
 
 </mapper>

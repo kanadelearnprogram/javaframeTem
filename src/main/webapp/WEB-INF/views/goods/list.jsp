@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,11 +109,18 @@
         <div class="nav-links">
             <a href="${pageContext.request.contextPath}/" class="btn">首页</a>
             <a href="${pageContext.request.contextPath}/goods/toAdd" class="btn btn-success">添加商品</a>
+            <!-- 示例：直接跳转至具体JSP页面的路径处理 -->
+            <a href="${pageContext.request.contextPath}/goods/directToJsp" class="btn">直接跳转JSP</a>
+            <!-- 示例：上级目录路径跳转 -->
+            <a href="../" class="btn">上级目录首页</a>
+            <!-- 示例：根目录路径跳转 -->
+            <a href="/temp_war_exploded/" class="btn">根目录首页</a>
         </div>
         
         <div class="search-box">
             <form action="${pageContext.request.contextPath}/goods/list" method="get">
                 <input type="text" name="goodsName" placeholder="商品名称" value="${goodsName}">
+
                 <input type="hidden" name="pageNum" value="1">
                 <input type="hidden" name="pageSize" value="${pageSize}">
                 <input type="submit" value="搜索">
@@ -137,7 +145,7 @@
                         <td>${goods.goodsId}</td>
                         <td>${goods.goodsName}</td>
                         <td>${goods.price}</td>
-                        <td>${goods.createTime}</td>
+                        <td><fmt:formatDate value="${goods.createTime}" pattern="yyyy-MM-dd" /></td>
                         <td>
                             <c:if test="${not empty goods.imgPath}">
                                 <img src="${goods.imgPath}" alt="商品图片">

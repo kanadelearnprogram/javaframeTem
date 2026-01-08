@@ -31,4 +31,10 @@ public interface GoodsMapper {
     // 考点3：分页查询 - 获取总数
     @Select("SELECT COUNT(*) FROM goods WHERE goods_name LIKE CONCAT('%', #{goodsName}, '%')")
     int countByLikeName(String goodsName);
+    
+    // 使用${}进行模糊查询的示例（不推荐使用，存在SQL注入风险）
+    // 实际使用在XML中定义的selectByLikeNameWithDollar方法
+    void selectByLikeNameWithDollar(java.util.Map<String, Object> params);
+    
+
 }

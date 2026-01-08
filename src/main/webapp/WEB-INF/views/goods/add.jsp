@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,6 +86,10 @@
         
         <div class="nav-links">
             <a href="${pageContext.request.contextPath}/goods/list" class="btn">返回列表</a>
+            <!-- 示例：上级目录路径跳转 -->
+            <a href="../goods/list" class="btn">上级目录跳转</a>
+            <!-- 示例：根目录路径跳转 -->
+            <a href="/temp_war_exploded/goods/list" class="btn">根目录跳转</a>
         </div>
         
         <form action="${pageContext.request.contextPath}/goods/add" method="post">
@@ -100,7 +105,8 @@
             
             <div class="form-group">
                 <label for="createTime">创建时间：</label>
-                <input type="date" id="createTime" name="createTime" required>
+                <input type="text" id="createTime" name="createTime" placeholder="yyyy-MM-dd 或 MM-dd-yy 格式" required>
+                <small>支持格式：yyyy-MM-dd 或 MM-dd-yy</small>
             </div>
             
             <div class="form-group">

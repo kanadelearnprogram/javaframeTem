@@ -12,7 +12,7 @@ public class Goods {
     private String goodsName;
     private BigDecimal price;
     
-    // 考点1：日期类型处理
+    // todo 考点1：日期类型处理 - 支持多种格式MM-dd-yy 自己改
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
     

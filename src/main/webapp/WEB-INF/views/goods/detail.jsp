@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,7 +92,7 @@
         
         <div class="detail-item">
             <label>创建时间：</label>
-            ${goods.createTime}
+            <fmt:formatDate value="${goods.createTime}" pattern="yyyy-MM-dd" />
         </div>
         
         <div class="image-container">
